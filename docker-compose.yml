@@ -1,0 +1,104 @@
+version: '3.8'
+
+services:
+  # Main Next.js Application
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@db:5432/courts_directory
+      - REDIS_URL=redis://redis:6379
+      - COURTY_AI_URL=http://courty-ai:8000
+    depends_on:
+      - db
+      - redis
+    networks:
+      - courts-network
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: courts_directory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - courts-network
+
+  # Redis for Caching
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - courts-network
+
+  # Data Scraper Service
+  scraper:
+    build:
+      context: ./services/scraper
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/courts_directory
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./data:/app/data
+    networks:
+      - courts-network
+
+  # Courty AI Service
+  courty-ai:
+    build:
+      context: ./services/courty-ai
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/courts_directory
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - AMAZON_API_KEY=${AMAZON_API_KEY}
+      - CJ_API_KEY=${CJ_API_KEY}
+    depends_on:
+      - db
+      - redis
+    networks:
+      - courts-network
+
+  # pgAdmin for Database Management
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@courts.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - courts-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  courts-network:
+    driver: bridge

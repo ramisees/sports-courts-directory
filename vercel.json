@@ -1,0 +1,28 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "regions": ["iad1", "sfo1"],
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "GOOGLE_MAPS_API_KEY": "@google_maps_api_key",
+    "NEXTAUTH_URL": "@nextauth_url",
+    "NEXTAUTH_SECRET": "@nextauth_secret",
+    "COURTY_AI_URL": "@courty_ai_url",
+    "OPENAI_API_KEY": "@openai_api_key",
+    "AMAZON_API_KEY": "@amazon_api_key",
+    "CJ_API_KEY": "@cj_api_key"
+  },
+  "functions": {
+    "pages/api/**/*.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/ai/:path*",
+      "destination": "${COURTY_AI_URL}/api/:path*"
+    }
+  ]
+}

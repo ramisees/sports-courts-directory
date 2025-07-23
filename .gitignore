@@ -1,0 +1,64 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Logs
+logs
+*.log
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+
+# Env
+.env
+.env.*
+.env.local
+
+# Vercel
+.vercel
+
+# Docker
+docker-compose.override.yml
+.docker/
+
+# Volumes
+postgres_data/
+redis_data/
+.vscode/
+
+# VSCode
+
+.vscode/settings.json
+
+# Prisma
+# Docker
+*.local
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# Misc
+
+# JetBrains IDE
+.idea/
+coverage/
+*.tgz
+.idea/
+*.swp
+
+# Public uploads
+public/uploads/

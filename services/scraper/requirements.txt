@@ -1,0 +1,11 @@
+requests==2.31.0
+beautifulsoup4==4.12.2
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.23
+googlemaps==4.10.0
+schedule==1.2.0
+python-dotenv==1.0.0
+firecrawl-py==0.0.8
+geopy==2.4.1
+fuzzywuzzy==0.18.0
+python-levenshtein==0.25.1
