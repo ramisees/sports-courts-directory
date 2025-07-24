@@ -39,7 +39,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">Coming Soon</h2>
           <p className="text-lg text-gray-600 mb-8">
-            We&apos;re working hard to bring you the most comprehensive sports courts directory!
+            We are working hard to bring you the most comprehensive sports courts directory!
           </p>
           <div className="text-sm text-gray-500">
             <p>🏀 Basketball Courts • 🎾 Tennis Courts • 🏓 Pickleball Courts</p>
