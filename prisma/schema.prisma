@@ -15,129 +15,129 @@ model Court {
   name        String
   description String?
   sportTypes  String[] // ["basketball", "tennis", "pickleball"]
-  
+
   // Location
-  address     String
-  city        String
-  state       String
-  zipCode     String
-  latitude    Float
-  longitude   Float
-  
+  address   String
+  city      String
+  state     String
+  zipCode   String
+  latitude  Float
+  longitude Float
+
   // Details
-  hours       Json? // Store hours in JSON format
-  fees        Json? // Fee structure in JSON
-  amenities   String[] // ["lighting", "parking", "restrooms"]
-  surface     String? // "concrete", "asphalt", "clay", etc.
-  
+  hours     Json? // Store hours in JSON format
+  fees      Json? // Fee structure in JSON
+  amenities String[] // ["lighting", "parking", "restrooms"]
+  surface   String? // "concrete", "asphalt", "clay", etc.
+
   // Booking
-  bookingUrl  String?
+  bookingUrl   String?
   bookingPhone String?
   bookingEmail String?
-  
+
   // Management
-  isActive    Boolean  @default(true)
-  verified    Boolean  @default(false)
-  
+  isActive Boolean @default(true)
+  verified Boolean @default(false)
+
   // Metadata
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   // Relations
-  reviews     Review[]
-  images      CourtImage[]
-  
+  reviews Review[]
+  images  CourtImage[]
+
   @@map("courts")
 }
 
 model Review {
-  id        String   @id @default(cuid())
-  courtId   String
-  court     Court    @relation(fields: [courtId], references: [id], onDelete: Cascade)
-  
-  rating    Int      // 1-5 stars
-  title     String?
-  content   String?
-  
+  id      String @id @default(cuid())
+  courtId String
+  court   Court  @relation(fields: [courtId], references: [id], onDelete: Cascade)
+
+  rating  Int // 1-5 stars
+  title   String?
+  content String?
+
   // User info (anonymous for now)
   userName  String?
   userEmail String?
-  
+
   // Metadata
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   @@map("reviews")
 }
 
 model CourtImage {
-  id       String @id @default(cuid())
-  courtId  String
-  court    Court  @relation(fields: [courtId], references: [id], onDelete: Cascade)
-  
-  url      String
-  caption  String?
+  id      String @id @default(cuid())
+  courtId String
+  court   Court  @relation(fields: [courtId], references: [id], onDelete: Cascade)
+
+  url       String
+  caption   String?
   isPrimary Boolean @default(false)
-  
+
   createdAt DateTime @default(now())
-  
+
   @@map("court_images")
 }
 
 model SportType {
-  id          String @id @default(cuid())
-  name        String @unique // "basketball", "tennis", etc.
+  id          String  @id @default(cuid())
+  name        String  @unique // "basketball", "tennis", etc.
   displayName String // "Basketball", "Tennis", etc.
   description String?
   icon        String? // Icon identifier
-  
-  createdAt   DateTime @default(now())
-  
+
+  createdAt DateTime @default(now())
+
   @@map("sport_types")
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  
+  id    String  @id @default(cuid())
+  email String  @unique
+  name  String?
+
   // Preferences
-  favoriteSports String[]
+  favoriteSports    String[]
   favoriteLocations String[]
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   @@map("users")
 }
 
 model SearchLog {
-  id           String   @id @default(cuid())
+  id           String  @id @default(cuid())
   query        String
   sportType    String?
   location     String?
   radius       Int?
   resultsCount Int
-  
+
   // User tracking (anonymous)
-  sessionId    String?
-  userAgent    String?
-  ipAddress    String?
-  
-  createdAt    DateTime @default(now())
-  
+  sessionId String?
+  userAgent String?
+  ipAddress String?
+
+  createdAt DateTime @default(now())
+
   @@map("search_logs")
 }
 
 model DataSource {
-  id          String   @id @default(cuid())
-  name        String   // "firecrawl", "google_maps", "manual"
+  id          String    @id @default(cuid())
+  name        String // "firecrawl", "google_maps", "manual"
   url         String?
   lastScraped DateTime?
-  isActive    Boolean  @default(true)
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
+  isActive    Boolean   @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@map("data_sources")
 }
