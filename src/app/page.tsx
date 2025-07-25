@@ -46,15 +46,11 @@ export default function Home() {
           <p className="text-xl mb-8 text-gray-300 max-w-2xl mx-auto">
             Discover basketball, tennis, pickleball, volleyball, and more courts in your area.
           </p>
-          {/* Advanced Search */}
+
           <div className="bg-gray-800/50 backdrop-blur-lg p-6 rounded-2xl shadow-2xl border border-gray-700/50 max-w-4xl mx-auto">
             <div className="grid md:grid-cols-4 gap-4 mb-4">
               <input
                 type="text"
-                placeholder="Enter location..."
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="bg-gray-700/50 text-white placeholder-gray-400 px-4 py-3 rounded-lg border border-gray-600 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all"
               />
               <select
                 value={sportFilter}
