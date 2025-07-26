@@ -1,11 +1,8 @@
 
 "use client";
-// ...existing code...
-
-
-"use client";
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import CourtSearch from '../../components/search/CourtSearch';
 
 const LiveMap = dynamic(() => import('../../components/maps/LiveMap'), { ssr: false });
 
@@ -14,35 +11,60 @@ export default function Home() {
   const [sportFilter, setSportFilter] = useState('all');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
-      {/* Hero Section with Search - Redesigned */}
-      <section className="relative flex flex-col items-center justify-center min-h-[60vh] bg-black text-white pb-16 pt-32">
-        {/* Logo */}
-        <img src="/logo.png" alt="Courts Finders Logo" className="w-40 h-40 mb-6 drop-shadow-xl" />
-        {/* Headline */}
-        <h1 className="text-5xl md:text-7xl font-extrabold text-center mb-4 tracking-tight leading-tight">
-          <span className="block text-white">Sair Courts</span>
-          <span className="block bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">Ad Soarts Findersion</span>
-        </h1>
-        <p className="text-lg md:text-2xl text-gray-300 text-center max-w-2xl mb-8">
-          Find other courts and their routes to other cities
-        </p>
-        {/* Search Bar */}
-        <div className="flex flex-col md:flex-row items-center w-full max-w-2xl gap-4 mb-6">
-          <input
-            type="text"
-            placeholder="Court, location, or feature"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="flex-1 px-6 py-4 rounded-l-2xl md:rounded-l-2xl md:rounded-r-none rounded-r-2xl bg-gray-900 border-2 border-gray-700 focus:border-yellow-400 text-lg placeholder-gray-400 outline-none shadow-lg"
-          />
-          <button className="px-8 py-4 bg-yellow-400 hover:bg-yellow-500 text-black font-bold rounded-r-2xl md:rounded-r-2xl md:rounded-l-none rounded-l-2xl text-lg shadow-lg transition-all flex items-center gap-2">
-            <span>Search</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
-            </svg>
-          </button>
+    <div className="flex min-h-screen">
+      {/* Main Content */}
+      <div className="flex-1 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white pt-16">
+        {/* Hero Section with Search - Redesigned */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+        {/* Left Side - Hero Content */}
+        <div className="flex flex-col justify-center">
+          <div className="mb-8">
+            <h1 className="text-5xl font-bold mb-4">
+              <span className="text-white">Sair Courts</span>
+              <br />
+              <span className="text-yellow-500">Ad Soarts Findersion</span>
+            </h1>
+            <p className="text-gray-400 text-xl">
+              Find the finest courts and their routes to other cities
+            </p>
+          </div>
+          
+          {/* Search Bar */}
+          <div className="flex items-center mb-6">
+            <input
+              type="text"
+              placeholder="Court, location, or feature"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="flex-1 bg-gray-800 border border-gray-700 rounded-l-lg px-4 py-3 text-white"
+            />
+            <button className="bg-yellow-500 text-black px-6 py-3 rounded-r-lg hover:bg-yellow-400">
+              Search
+            </button>
+          </div>
+
+          {/* Features */}
+          <div className="flex gap-4">
+            <div className="flex items-center gap-2 text-yellow-500">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Courts timing
+            </div>
+            <div className="flex items-center gap-2 text-yellow-500">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 12.414a1.998 1.998 0 01-2.827-2.827l-7.778-7.778a1 1 0 00-1.414 1.414l7.778 7.778a1.998 1.998 0 012.827 2.827l4.243 4.243a1 1 0 001.414 0z" />
+              </svg>
+              Locations
+            </div>
+          </div>
         </div>
+
+        {/* Right Side - Map */}
+        <div className="relative min-h-[400px] bg-gray-800 rounded-lg overflow-hidden">
+          <LiveMap />
+        </div>
+      </section>
         {/* Features List */}
         <div className="flex flex-col md:flex-row gap-4 items-center justify-center mt-2">
           <div className="flex items-center gap-2 text-yellow-400 font-semibold">

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Navigation from '../../components/ui/Navigation'
 
 export const metadata: Metadata = {
-  title: 'Sports Courts Directory',
-  description: 'Find sports courts near you!',
+  title: 'Sair Courts - Ad Soarts Findersion',
+  description: 'Find the finest courts near you',
 }
 
 export default function RootLayout({
@@ -13,10 +14,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <header className="bg-blue-600 text-white p-4">
-          <h1 className="text-2xl">🏀 Sports Courts Directory</h1>
-        </header>
+      <body className="bg-black text-white">
+        <Navigation />
         <main>{children}</main>
       </body>
     </html>
