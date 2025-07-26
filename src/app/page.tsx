@@ -5,6 +5,9 @@
 
 "use client";
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const LiveMap = dynamic(() => import('../../components/maps/LiveMap'), { ssr: false });
 
 export default function Home() {
   const [location, setLocation] = useState('');
@@ -12,85 +15,54 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-lg border-b border-gray-700/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
-                <span className="text-xl">🏀</span>
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-                Sports Courts Directory
-              </h1>
-            </div>
-            <div className="flex items-center space-x-6">
-              <a href="#" className="hover:text-orange-400 transition-colors">Courts</a>
-              <a href="#" className="hover:text-orange-400 transition-colors">Sports</a>
-              <a href="#" className="hover:text-orange-400 transition-colors">About</a>
-              <button className="bg-gradient-to-r from-orange-500 to-red-600 px-4 py-2 rounded-lg font-semibold hover:from-orange-600 hover:to-red-700 transition-all">
-                Add Court
-              </button>
-            </div>
-          </div>
+      {/* Hero Section with Search - Redesigned */}
+      <section className="relative flex flex-col items-center justify-center min-h-[60vh] bg-black text-white pb-16 pt-32">
+        {/* Logo */}
+        <img src="/logo.png" alt="Courts Finders Logo" className="w-40 h-40 mb-6 drop-shadow-xl" />
+        {/* Headline */}
+        <h1 className="text-5xl md:text-7xl font-extrabold text-center mb-4 tracking-tight leading-tight">
+          <span className="block text-white">Sair Courts</span>
+          <span className="block bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">Ad Soarts Findersion</span>
+        </h1>
+        <p className="text-lg md:text-2xl text-gray-300 text-center max-w-2xl mb-8">
+          Find other courts and their routes to other cities
+        </p>
+        {/* Search Bar */}
+        <div className="flex flex-col md:flex-row items-center w-full max-w-2xl gap-4 mb-6">
+          <input
+            type="text"
+            placeholder="Court, location, or feature"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="flex-1 px-6 py-4 rounded-l-2xl md:rounded-l-2xl md:rounded-r-none rounded-r-2xl bg-gray-900 border-2 border-gray-700 focus:border-yellow-400 text-lg placeholder-gray-400 outline-none shadow-lg"
+          />
+          <button className="px-8 py-4 bg-yellow-400 hover:bg-yellow-500 text-black font-bold rounded-r-2xl md:rounded-r-2xl md:rounded-l-none rounded-l-2xl text-lg shadow-lg transition-all flex items-center gap-2">
+            <span>Search</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+            </svg>
+          </button>
         </div>
-      </nav>
-
-      {/* Hero Section with Search */}
-      <section className="pt-24 pb-16 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 text-center">
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-            Find Sports Courts Near You
-          </h1>
-          <p className="text-xl mb-8 text-gray-300 max-w-2xl mx-auto">
-            Discover basketball, tennis, pickleball, volleyball, and more courts in your area.
-          </p>
-
-          <div className="bg-gray-800/50 backdrop-blur-lg p-6 rounded-2xl shadow-2xl border border-gray-700/50 max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-4 gap-4 mb-4">
-              <input
-                type="text"
-              />
-              <select
-                value={sportFilter}
-                onChange={(e) => setSportFilter(e.target.value)}
-                className="bg-gray-700/50 text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-orange-500"
-              >
-                <option value="all">All Sports</option>
-                <option value="basketball">🏀 Basketball</option>
-                <option value="tennis">🎾 Tennis</option>
-                <option value="pickleball">🏓 Pickleball</option>
-                <option value="volleyball">🏐 Volleyball</option>
-              </select>
-              <select className="bg-gray-700/50 text-white px-4 py-3 rounded-lg border border-gray-600">
-                <option>Distance</option>
-                <option>1 mile</option>
-                <option>5 miles</option>
-                <option>10 miles</option>
-              </select>
-              <button className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-red-700 transition-all transform hover:scale-105">
-                Search Courts
-              </button>
-            </div>
-            {/* Quick Filters */}
-            <div className="flex flex-wrap gap-2 justify-center">
-              <button className="bg-gray-700/50 hover:bg-orange-500/20 border border-gray-600 hover:border-orange-500 px-3 py-1 rounded-full text-sm transition-all">
-                🆓 Free Courts
-              </button>
-              <button className="bg-gray-700/50 hover:bg-orange-500/20 border border-gray-600 hover:border-orange-500 px-3 py-1 rounded-full text-sm transition-all">
-                💡 Lighted
-              </button>
-              <button className="bg-gray-700/50 hover:bg-orange-500/20 border border-gray-600 hover:border-orange-500 px-3 py-1 rounded-full text-sm transition-all">
-                🅿️ Parking
-              </button>
-              <button className="bg-gray-700/50 hover:bg-orange-500/20 border border-gray-600 hover:border-orange-500 px-3 py-1 rounded-full text-sm transition-all">
-                🏢 Indoor
-              </button>
-            </div>
+        {/* Features List */}
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-center mt-2">
+          <div className="flex items-center gap-2 text-yellow-400 font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" />
+            </svg>
+            Owners Routing
+          </div>
+          <div className="flex items-center gap-2 text-yellow-400 font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 12.414a6 6 0 10-1.414 1.414l4.243 4.243a1 1 0 001.414-1.414z" />
+            </svg>
+            Locations
           </div>
         </div>
       </section>
+
+
+      {/* Live Map Section */}
+      <LiveMap />
 
       {/* Featured Courts */}
       <section className="py-16">
