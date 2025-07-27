@@ -27,6 +27,7 @@ A comprehensive platform for discovering and booking sports courts, featuring:
 ## 🛠 Tech Stack
 
 ### Core Technologies
+
 - **Next.js 14**
   - App Router architecture
   - Server-side rendering
@@ -43,6 +44,7 @@ A comprehensive platform for discovering and booking sports courts, featuring:
   - CI/CD pipeline
 
 ### APIs & Services
+
 - **Google Maps Integration**
   - Real-time location services
   - Court mapping visualization
@@ -74,31 +76,34 @@ A comprehensive platform for discovering and booking sports courts, featuring:
 ### Environment Setup
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/ramisees/sports-courts-directory.git
    cd sports-courts-directory
    ```
 
 2. Create a `.env` file with the following variables:
+
    ```env
    # Database
    DATABASE_URL="postgresql://..."
-   
+
    # APIs
    GOOGLE_MAPS_API_KEY="AIzaSyDUsmAa5CVGF9iN_vwwVyUYluJ0-4Ht_dE"
    FIRECRAWL_API_KEY="fc-f958e894f9c742b69b41ac3b168f3800"
    CJ_AFFILIATE_KEY="your-cj-key"
-   
+
    # Auth & Cache
    NEXTAUTH_SECRET="your-secret"
    NEXTAUTH_URL="http://localhost:3000"
    REDIS_URL="redis://..."
-   
+
    # AI Service
    COURTY_AI_ENDPOINT="http://localhost:5000"
    ```
 
 3. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -113,6 +118,7 @@ A comprehensive platform for discovering and booking sports courts, featuring:
 ### Development
 
 Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -122,6 +128,7 @@ The application will be available at http://localhost:3000
 ### Docker Development
 
 Use Docker for development:
+
 ```bash
 docker-compose up
 ```
