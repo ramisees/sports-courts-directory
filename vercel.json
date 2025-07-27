@@ -4,8 +4,8 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "regions": ["iad1", "sfo1"],
-  "projectId": "prj_yr6PoVP2IRSfrVSUU2ITSPHHpHtr",
-  "orgId": "RRLEes6Oi1zCei4dVpUcXl6a",
+  "projectid": "prj_yr6PoVP2IRSfrVSUU2ITSPHHpHtr",
+  "orgid": "RRLEes6Oi1zCei4dVpUcXl6a",
   "functions": {
     "pages/api/**/*.js": {
       "maxDuration": 30
