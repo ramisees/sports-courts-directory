@@ -48,9 +48,8 @@ export default function CourtCard({ court, onQuickBook }: CourtCardProps) {
         <Image
           src={court.images[0]}
           alt={court.name}
-          className="transition-transform duration-500 group-hover:scale-110"
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
           fill
-          className="object-cover transform group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         
