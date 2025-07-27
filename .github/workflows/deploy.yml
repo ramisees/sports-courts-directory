@@ -2,7 +2,7 @@ name: Deploy to Vercel
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -10,48 +10,48 @@ jobs:
     permissions:
       contents: read
       deployments: write
-    
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        fetch-depth: 0
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build project
-      run: npm run build
-      env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
-        NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
-    - name: Verify Vercel credentials
-      run: |
-        if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
-          echo "Error: VERCEL_TOKEN is not set in repository secrets"
-          exit 1
-        fi
-        echo "Vercel credentials verified"
-    
-    - name: Deploy to Vercel
-      uses: amondnet/vercel-action@v25
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: RRLEes6Oi1zCei4dVpUcXl6a
-        vercel-project-id: prj_DquyuDq08yzux0hv4CtA6weAtN2G
-        vercel-args: '--prod'
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        VERCEL_ORG_ID: RRLEes6Oi1zCei4dVpUcXl6a
-        VERCEL_PROJECT_ID: prj_DquyuDq08yzux0hv4CtA6weAtN2G
-        VERCEL_GIT_COMMIT_SHA: ${{ github.sha }}
-        VERCEL_GIT_COMMIT_REF: ${{ github.ref_name }}
-        NODE_ENV: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+
+      - name: Verify Vercel credentials
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "Error: VERCEL_TOKEN is not set in repository secrets"
+            exit 1
+          fi
+          echo "Vercel credentials verified"
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: RRLEes6Oi1zCei4dVpUcXl6a
+          vercel-project-id: prj_yr6PoVP2IRSfrVSUU2ITSPHHpHtr
+          vercel-args: "--prod"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: RRLEes6Oi1zCei4dVpUcXl6a
+          VERCEL_PROJECT_ID: prj_yr6PoVP2IRSfrVSUU2ITSPHHpHtr
+          VERCEL_GIT_COMMIT_SHA: ${{ github.sha }}
+          VERCEL_GIT_COMMIT_REF: ${{ github.ref_name }}
+          NODE_ENV: production
