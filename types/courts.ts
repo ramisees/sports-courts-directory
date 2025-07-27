@@ -2,6 +2,7 @@ export interface Court {
   id: string;
   name: string;
   type: CourtType;
+  description: string;
   location: {
     lat: number;
     lng: number;

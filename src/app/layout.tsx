@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Navigation from '../../components/ui/Navigation'
+import { montserrat, openSans } from './fonts'
 
 export const metadata: Metadata = {
-  title: 'Sair Courts - Ad Soarts Findersion',
-  description: 'Find the finest courts near you',
+  title: 'Courty - Find and Book Sports Courts',
+  description: 'Discover and book sports courts near you with AI-powered recommendations',
 }
 
 export default function RootLayout({
@@ -13,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="bg-black text-white">
+    <html lang="en" className={`${montserrat.variable} ${openSans.variable}`}>
+      <body className={`bg-primary text-text-primary font-body`}>
         <Navigation />
         <main>{children}</main>
       </body>

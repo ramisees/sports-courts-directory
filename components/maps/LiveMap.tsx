@@ -10,12 +10,12 @@ interface LiveMapProps {
 
 export default function LiveMap({ courts, loading, selectedCourt, onCourtSelect }: LiveMapProps) {
   return (
-    <div className="relative w-full h-full min-h-[500px] bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50">
-      <div className="absolute inset-0 bg-[#1a1a1a]">
+    <div className="relative w-full h-full min-h-[500px] bg-secondary/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 transition-all duration-300 hover:border-accent/30">
+      <div className="absolute inset-0 bg-primary/90">
         {/* Map Controls */}
-        <div className="absolute top-4 right-4 z-10 bg-black/80 rounded-lg p-3 backdrop-blur-sm">
+        <div className="absolute top-4 right-4 z-10 bg-black/80 rounded-lg p-3 backdrop-blur-sm transition-transform duration-300 hover:scale-105">
           <div className="flex space-x-2">
-            <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors text-white">
+            <button className="p-2 hover:bg-secondary rounded-lg transition-all duration-200 text-text-primary hover:text-accent transform hover:scale-110">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
               </svg>

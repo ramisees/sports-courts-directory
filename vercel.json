@@ -8,5 +8,27 @@
     "pages/api/**/*.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://api.courty.sports",
+    "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY": "@google_maps_api_key",
+    "NEXT_PUBLIC_FIRECRAWL_API_KEY": "@firecrawl_api_key",
+    "NEXT_PUBLIC_CJ_AFFILIATE_KEY": "@cj_affiliate_key"
+  },
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
+      ]
+    }
+  ]
 }

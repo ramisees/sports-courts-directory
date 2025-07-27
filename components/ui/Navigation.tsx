@@ -7,24 +7,24 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-95 border-b border-gray-800">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#121212] border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Left side with logo and navigation */}
           <div className="flex items-center space-x-8">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/logo.png" alt="Sair Courts Logo" width={50} height={50} className="object-contain" />
+              <span className="text-2xl text-yellow-500">∞</span>
+              <span className="text-xl font-semibold text-white">Courty</span>
             </Link>
             
             {/* Main Navigation */}
             <div className="hidden md:flex items-center space-x-6">
-              <Link href="/centers" className="text-gray-300 hover:text-yellow-500 transition-colors">Centers</Link>
-              <Link href="/benefits" className="text-gray-300 hover:text-yellow-500 transition-colors">Benefits</Link>
-              <Link href="/events" className="text-gray-300 hover:text-yellow-500 transition-colors">Events</Link>
-              <Link href="/bags" className="text-gray-300 hover:text-yellow-500 transition-colors">Bags</Link>
-              <Link href="/forum" className="text-gray-300 hover:text-yellow-500 transition-colors">Forum</Link>
               <Link href="/courts" className="text-gray-300 hover:text-yellow-500 transition-colors">Courts</Link>
+              <Link href="/benefits" className="text-gray-300 hover:text-yellow-500 transition-colors">Benefits</Link>
+              <Link href="/sports" className="text-gray-300 hover:text-yellow-500 transition-colors">Sports</Link>
+              <Link href="/support" className="text-gray-300 hover:text-yellow-500 transition-colors">Support</Link>
+              <Link href="/forums" className="text-gray-300 hover:text-yellow-500 transition-colors">Forums</Link>
             </div>
           </div>
 
