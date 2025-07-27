@@ -4,6 +4,7 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "regions": ["iad1", "sfo1"],
+  "projectId": "prj_DquyuDq08yzux0hv4CtA6weAtN2G",
   "functions": {
     "pages/api/**/*.js": {
       "maxDuration": 30
