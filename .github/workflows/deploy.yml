@@ -7,9 +7,15 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
     
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -31,8 +37,9 @@ jobs:
       uses: amondnet/vercel-action@v25
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-org-id: RRLEes6Oi1zCei4dVpUcXl6a
         vercel-project-id: prj_DquyuDq08yzux0hv4CtA6weAtN2G
         vercel-args: '--prod'
       env:
+        VERCEL_ORG_ID: RRLEes6Oi1zCei4dVpUcXl6a
         VERCEL_PROJECT_ID: prj_DquyuDq08yzux0hv4CtA6weAtN2G
